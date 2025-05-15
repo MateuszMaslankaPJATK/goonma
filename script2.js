@@ -1,8 +1,8 @@
 window.onload = function () {
   const images = [
-    { src: "images/1.png", chance: 0.01 },
-    { src: "images/2.png", chance: 0.01 },
-    { src: "images/3.png", chance: 0.98 }
+    { src: "images/1.png", chance: 0.3 },
+    { src: "images/2.png", chance: 0.3 },
+    { src: "images/3.png", chance: 0.3 }
   ];
 
   const rand = Math.random();
@@ -26,7 +26,7 @@ window.onload = function () {
   imgElement.classList.add('fade-in');
   szansaElement.classList.add('fade-in');
 
-  if (selected.chance <= 0.1) {
+  if (selected.chance <= 1) {
     document.querySelector('.ultra').classList.add('flash');
   }
 };
