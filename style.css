@@ -4,7 +4,7 @@
 }
 
 .flash {
-  animation: flash 1s infinite alternate;
+  animation: flash 10s infinite alternate;
 }
 
 @keyframes fadeIn {
@@ -13,7 +13,7 @@
 }
 
 @keyframes flash {
-  0% { opacity: 1; color: red; }
+  0% { opacity: 10; color: red; }
   100% { opacity: 0.1; color: gold; }
 }
 
