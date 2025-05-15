@@ -1,29 +1,29 @@
-window.onload = function () {
-  const images = [
-    { src: 'images/1.png', chance: 0.0 },
-    { src: 'images/2.png', chance: 0.0 },
-    { src: 'images/3.png', chance: 1.0 },
-  ];
+window.onload = async function () {
+    try {
+        const response = await fetch('data.json');
+        const images = await response.json();
 
-  const rand = Math.random(); // liczba z przedziału 0.0–1.0
-    let sum = 0;
-    let selected = images[0];
+        const rand = Math.random();
+        let sum = 0;
+        let selected = images[0]; // domyślnie pierwszy
 
-    for (const image of images) {
-        sum += image.chance;
-        if (rand <= sum) {
-            selected = image;
-            break;
+        for (const image of images) {
+            sum += image.chance;
+            if (rand <= sum) {
+                selected = image;
+                break;
+            }
         }
+
+        const imgElement = document.getElementById('wynik');
+        const szansaElement = document.getElementById('szansa');
+
+        imgElement.src = selected.src;
+        szansaElement.textContent = `Szansa: ${(selected.chance * 100).toFixed(1)}%`;
+
+        imgElement.classList.add('fade-in');
+        szansaElement.classList.add('fade-in');
+    } catch (error) {
+        console.error('Błąd ładowania danych:', error);
     }
-
-    const imgElement = document.getElementById('wynik');
-    const szansaElement = document.getElementById('szansa');
-
-    // Ustaw dane i animację
-    imgElement.src = selected.src;
-    szansaElement.textContent = `Szansa: ${(selected.chance * 100).toFixed(1)}%`;
-
-    imgElement.classList.add('fade-in');
-    szansaElement.classList.add('fade-in');
 };
