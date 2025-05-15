@@ -1,8 +1,8 @@
 window.onload = function () {
   const images = [
-    { src: 'images/1.png', chance: 0.02 },
-    { src: 'images/2.png', chance: 0.40 },
-    { src: 'images/3.png', chance: 0.60 },
+    { src: 'images/1.png', chance: 0.0 },
+    { src: 'images/2.png', chance: 0.0 },
+    { src: 'images/3.png', chance: 1.0 },
   ];
 
   const rand = Math.random(); // liczba z przedziału 0.0–1.0
