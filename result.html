@@ -2,31 +2,21 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Wynik</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wynik losowania</title>
   <link rel="stylesheet" href="style.css">
-  <script>
-    window.onload = function () {
-      const images = [
-        { src: 'images/1.png', chance: 0.1 },
-        { src: 'images/2.png', chance: 0.9 }
-      ];
-      const rand = Math.random();
-      let sum = 0;
-      let selected = images[0].src;
-      for (const image of images) {
-        sum += image.chance;
-        if (rand <= sum) {
-          selected = image.src;
-          break;
-        }
-      }
-      document.getElementById('wynik').src = selected;
-    };
-  </script>
+  <script src="script2.js" defer></script>
 </head>
 <body>
-  <h1>Twój wynik:</h1>
+  <h1>Wylosowana karta</h1>
+
   <img id="wynik" src="" alt="Wylosowany obrazek" width="300" height="450">
-  <div class="gratulacje">GRATULACJE</div>
+
+  <p id="szansa"></p>
+
+  <div class="gratulacje">GRATULACJE!</div>
+
+  <button onclick="window.location.reload()">Losuj ponownie</button>
 </body>
 </html>
+
