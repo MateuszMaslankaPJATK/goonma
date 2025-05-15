@@ -1,0 +1,5 @@
+[
+  { "src": "images/1.png", "chance": 0.7 },
+  { "src": "images/2.png", "chance": 0.2 },
+  { "src": "images/3.png", "chance": 0.1 }
+]
