@@ -1,8 +1,8 @@
 window.onload = function () {
   const images = [
-    { src: "images/1.png", chance: 0.3 },
-    { src: "images/2.png", chance: 0.3 },
-    { src: "images/3.png", chance: 0.3 }
+    { src: "images/1.png", chance: 1 },
+    { src: "images/2.png", chance: 1 },
+    { src: "images/3.png", chance: 100 }
   ];
 
   const rand = Math.random();
@@ -21,12 +21,12 @@ window.onload = function () {
   const szansaElement = document.getElementById('szansa');
 
   imgElement.src = selected.src;
-  szansaElement.textContent = `SZANSA: ${(selected.chance * 100).toFixed(1)}%`;
+  szansaElement.textContent = `SZANSA: ${(selected.chance * 1000).toFixed(1)}%`;
 
   imgElement.classList.add('fade-in');
   szansaElement.classList.add('fade-in');
 
-  if (selected.chance <= 1) {
+  if (selected.chance <= 0.1) {
     document.querySelector('.ultra').classList.add('flash');
   }
 };
