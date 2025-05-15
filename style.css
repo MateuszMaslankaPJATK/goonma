@@ -1,3 +1,4 @@
+/* Ogólny styl strony */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -11,6 +12,7 @@ body {
   text-align: center;
 }
 
+/* Styl przycisku */
 button {
   background-color: white;
   color: #057A38;
@@ -27,18 +29,41 @@ button:hover {
   background-color: #e0e0e0;
 }
 
+/* Styl obrazka */
 img {
   max-width: 90%;
   height: auto;
   margin-bottom: 20px;
 }
 
+/* Nagłówek */
 h1 {
   font-size: 2rem;
   margin-bottom: 30px;
 }
 
+/* Tekst gratulacyjny */
 .gratulacje {
   font-size: 2rem;
   font-weight: bold;
+}
+
+/* Napis z szansą */
+#szansa {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Animacja pojawiania się */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
