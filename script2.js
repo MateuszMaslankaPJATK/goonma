@@ -1,8 +1,8 @@
 window.onload = function () {
     const images = [
-        { src: "images/1.png", chance: 0.1 },
-        { src: "images/2.png", chance: 0.1 },
-        { src: "images/3.png", chance: 0.8 }
+        { src: "images/1.png", chance: 0.01 },
+        { src: "images/2.png", chance: 0.01 },
+        { src: "images/3.png", chance: 0.98 }
     ];
 
     const rand = Math.random();
@@ -21,12 +21,12 @@ window.onload = function () {
     const szansaElement = document.getElementById('szansa');
 
     imgElement.src = selected.src;
-    szansaElement.textContent = `Szansa na trafienie tej karty: ${(selected.chance * 100).toFixed(1)}%`;
+    szansaElement.textContent = `SZANSA: ${(selected.chance * 100).toFixed(1)}%`;
 
     imgElement.classList.add('fade-in');
     szansaElement.classList.add('fade-in');
 
     if (selected.chance <= 0.1) {
-        document.querySelector('.gratulacje').classList.add('flash');
+        document.querySelector('!!!!!ULTRA RARE KARTA!!!!!').classList.add('flash');
     }
 };
