@@ -1,69 +1,30 @@
 /* Ogólny styl strony */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #057A38;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: white;
-  text-align: center;
-}
-
-/* Styl przycisku */
-button {
-  background-color: white;
-  color: #057A38;
-  font-size: 1.5rem;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  transition: 0.3s;
-}
-
-button:hover {
-  background-color: #e0e0e0;
-}
-
-/* Styl obrazka */
-img {
-  max-width: 90%;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-/* Nagłówek */
-h1 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
-
-/* Tekst gratulacyjny */
-.gratulacje {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-/* Napis z szansą */
-#szansa {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: #ffffff;
-}
-
-/* Animacja pojawiania się */
 .fade-in {
-  animation: fadeIn 1s ease forwards;
-  opacity: 0;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.flash {
+  animation: flash 1s infinite alternate;
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+
+@keyframes flash {
+  0% { opacity: 1; color: red; }
+  100% { opacity: 0.1; color: gold; }
+}
+
+.gratulacje {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  display: none;
+}
+
+.gratulacje.flash {
+  display: block;
+}
+
