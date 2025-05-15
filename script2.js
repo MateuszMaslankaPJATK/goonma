@@ -1,8 +1,8 @@
 window.onload = function () {
   const images = [
-    { src: "images/1.png", chance: 1 },
-    { src: "images/2.png", chance: 1 },
-    { src: "images/3.png", chance: 100 }
+    { src: "images/1.png", chance: 0 },
+    { src: "images/2.png", chance: 0 },
+    { src: "images/3.png", chance: 1 }
   ];
 
   const rand = Math.random();
