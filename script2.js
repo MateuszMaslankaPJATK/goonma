@@ -1,11 +1,26 @@
 window.onload = function () {
   const images = [
-    { src: "images/1.png", chance: 0 },
-    { src: "images/2.png", chance: 0 },
-    { src: "images/3.png", chance: 1 }
+    { src: "images/Green_1.png", chance: 64.9 },
+    { src: "images/Green_2.png", chance: 64.9 },
+    { src: "images/Green_3.png", chance: 64.9 },
+    { src: "images/Green_4.png", chance: 64.9 },
+    { src: "images/Green_5.png", chance: 64.9 },
+    { src: "images/Green_6.png", chance: 64.9 },
+    { src: "images/Blue_1.png", chance: 20 },
+    { src: "images/Blue_2.png", chance: 20 },
+    { src: "images/Blue_3.png", chance: 20 },
+    { src: "images/Blue_4.png", chance: 20 },
+    { src: "images/Red_1.png", chance: 10 },
+    { src: "images/Red_2.png", chance: 10 },
+    { src: "images/Red_3.png", chance: 10 },
+    { src: "images/Yellow_1.png", chance: 5 },
+    { src: "images/Yellow_2.png", chance: 5 },
+    { src: "images/Mythic.png", chance: 0.1 }
   ];
 
-  const rand = Math.random();
+  const totalWeight = images.reduce((sum, img) => sum + img.chance, 0);
+  const rand = Math.random() * totalWeight;
+
   let sum = 0;
   let selected = images[0];
 
@@ -21,7 +36,7 @@ window.onload = function () {
   const szansaElement = document.getElementById('szansa');
 
   imgElement.src = selected.src;
-  szansaElement.textContent = `SZANSA: ${(selected.chance * 1000).toFixed(1)}%`;
+  szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
 
   imgElement.classList.add('fade-in');
   szansaElement.classList.add('fade-in');
