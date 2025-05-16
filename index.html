@@ -86,20 +86,6 @@
       const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
       html += `<p>Karta ${kolor} wypadła ${count} razy (${procent}%)</p>`;
 
-      .flash {
-  animation: flash 1s infinite alternate;
-}
-
-@keyframes flash {
-  0% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  100% {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-  }
-}
 
     });
 
