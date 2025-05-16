@@ -3,26 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wynik losowania</title>
+  <title>GOONMA – Wynik</title>
   <link rel="stylesheet" href="style.css" />
   <script src="script2.js" defer></script>
 </head>
 <body>
   <div class="container">
-    <h1>GRATULACJE</h1>
+    <img id="wynik" src="" alt="Wylosowany obrazek" />
 
-    <img id="wynik" src="" alt="Wylosowany obrazek" width="300" height="450" />
-
-    <p id="szansa">SZANSA:</p>
+    <p id="szansa" class="big-text"></p>
+    <p id="data" class="big-text"></p>
+    <p id="kod" class="big-text"></p>
 
     <div class="ultra" style="display: none;">
       <p class="highlight">!!!!! ULTRA RARE KARTA !!!!!</p>
     </div>
 
-    <p id="data"></p>
-    <p id="kod"></p>
-
-    <button onclick="window.location.reload()">Losuj ponownie</button>
+    <button onclick="window.location.reload()">LOSUJ PONOWNIE</button>
   </div>
 </body>
 </html>
