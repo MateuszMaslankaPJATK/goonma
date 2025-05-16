@@ -16,5 +16,21 @@
       <button onclick="window.location.href='Karty.html'">WSZYTSKIE KARTY</button>
     </div>
   </div>
+  <script>
+  const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+  const total = stats.total || 0;
+
+  const kolory = ["Green", "Blue", "Red", "Yellow", "Mythic"];
+  let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
+
+  kolory.forEach(kolor => {
+    const count = stats[kolor] || 0;
+    const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
+    html += `<p>Karta <strong>${kolor}</strong> wypadła <strong>${count}</strong> razy (${procent}%)</p>`;
+  });
+
+  document.getElementById("liczniki").innerHTML = html;
+</script>
+
 </body>
 </html>
