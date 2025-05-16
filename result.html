@@ -57,6 +57,22 @@
 
     button:hover {
       background-color: #219150;
+
+      {      .flash {
+  animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+}
     }
   </style>
   <script src="script2.js" defer></script>
