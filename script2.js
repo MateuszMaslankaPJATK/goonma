@@ -1,4 +1,4 @@
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
   const images = [
     { src: "images/Green_1.png", chance: 64.9 },
     { src: "images/Green_2.png", chance: 64.9 },
@@ -34,31 +34,25 @@ window.onload = function () {
 
   const imgElement = document.getElementById('wynik');
   const szansaElement = document.getElementById('szansa');
+  const dataElement = document.getElementById("data");
+  const kodElement = document.getElementById("kod");
 
   imgElement.src = selected.src;
   szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
 
+  // Data losowania
+  const now = new Date();
+  dataElement.textContent = "Data losowania: " + now.toLocaleString();
+
+  // Unikalny kod losowania
+  const kod = [...Array(10)].map(() => Math.random().toString(36)[2].toUpperCase()).join("");
+  kodElement.textContent = "Kod potwierdzający: " + kod;
+
   imgElement.classList.add('fade-in');
   szansaElement.classList.add('fade-in');
 
+  // Ultra rare efekt
   if (selected.chance <= 0.1) {
-    document.querySelector('.ultra').classList.add('flash');
+    document.querySelector(".ultra").style.display = "block";
   }
-  // Data losowania
-const dataElement = document.getElementById("data");
-const now = new Date();
-dataElement.textContent = "Data losowania: " + now.toLocaleString();
-
-// Unikalny kod losowania
-const kodElement = document.getElementById("kod");
-const kod = [...Array(10)]
-  .map(() => Math.random().toString(36)[2].toUpperCase())
-  .join("");
-kodElement.textContent = "Kod potwierdzający: " + kod;
-
-// Pokaż komunikat, jeśli ultra rare
-if (selected.chance <= 0.1) {
-  document.querySelector(".ultra").style.display = "block";
-}
-
-};
+});
