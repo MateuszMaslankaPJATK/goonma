@@ -1,16 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOONMA Losowanie</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #eaffea;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #27ae60;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    #liczniki {
+      margin-top: 20px;
+    }
+
+    #liczniki p {
+      font-weight: bold;
+      margin: 5px 0;
+    }
+  </style>
+</head>
 <body>
   <div class="container">
-    <h1><span class="highlight">WYLOSUJ</span> SWOJĄ GOONMĘ</h1>
+    <h1>WYLOSUJ SWOJĄ GOONMĘ</h1>
 
-    <!-- PRZYCISKI NA GÓRZE -->
     <div class="button-wrapper">
-      <button onclick="window.location.href='result.html'">LOSUJ</button>
-      <button onclick="window.location.href='Karty.html'">WSZYSTKIE KARTY</button>
-      <button onclick="window.location.href='statystyki.html'">STATYSTYKI</button>
-      <button onclick="window.location.href='informacje.html'">O NASZYM PRODUKCIE</button>
+      <button onclick="window.location.href='result.html'">🎲 LOSUJ</button>
+      <button onclick="window.location.href='Karty.html'">📂 WSZYSTKIE KARTY</button>
+      <button onclick="window.location.href='statystyki.html'">📊 STATYSTYKI</button>
+      <button onclick="window.location.href='informacje.html'">ℹ INFORMACJE</button>
     </div>
 
-    <!-- STATYSTYKI NIŻEJ -->
     <div id="liczniki"></div>
   </div>
 
@@ -30,3 +90,5 @@
     document.getElementById("liczniki").innerHTML = html;
   </script>
 </body>
+</html>
+
