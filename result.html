@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wynik losowania</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script src="script2.js" defer></script>
 </head>
 <body>
-  <h1>Wylosowana karta</h1>
+  <div class="container">
+    <h1>GRATULACJE</h1>
 
-  <img id="wynik" src="" alt="Wylosowany obrazek" width="600" height="900">
+    <img id="wynik" src="" alt="Wylosowany obrazek" width="300" height="450" />
 
-  <p id="szansa">SZANSA:</p>
+    <p id="szansa">SZANSA:</p>
 
-  <div class="gratulacje ultra">!!!!!ULTRA RARE KARTA!!!!!</div>
+    <div class="ultra" style="display: none;">
+      <p class="highlight">!!!!! ULTRA RARE KARTA !!!!!</p>
+    </div>
 
-  <button onclick="window.location.reload()">Losuj ponownie</button>
+    <p id="data"></p>
+    <p id="kod"></p>
+
+    <button onclick="window.location.reload()">Losuj ponownie</button>
+  </div>
 </body>
 </html>
