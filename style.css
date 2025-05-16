@@ -1,30 +1,11 @@
-/* Ogólny styl strony */
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-
-.flash {
-  animation: flash 10s infinite alternate;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes flash {
-  0% { opacity: 10; color: red; }
-  100% { opacity: 0.1; color: gold; }
-}
-
-.gratulacje {
-  margin-top: 20px;
-  font-size: 20px;
+#data, #kod {
+  margin-top: 10px;
   font-weight: bold;
-  display: none;
+  color: #2c3e50;
 }
 
-.gratulacje.flash {
-  display: block;
+img {
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
 }
-
