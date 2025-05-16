@@ -1,58 +1,40 @@
-body {
-  background: #eaffea;
-  font-family: sans-serif;
-  margin: 0;
-  padding: 20px;
+.container {
   text-align: center;
+  padding: 20px;
 }
 
-h1 {
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-}
-
-img#wynik {
-  width: 90%;
-  max-width: 350px;
-  height: auto;
-  display: block;
-  margin: 0 auto 15px;
-  border-radius: 10px;
-}
-
-p, .ultra, #szansa, #kod, #data {
-  font-size: 1rem;
-  margin: 8px 0;
-  font-weight: bold;
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
 }
 
 button {
-  display: block;
   width: 80%;
-  max-width: 250px;
-  margin: 10px auto;
+  max-width: 280px;
   padding: 12px;
-  background-color: #27ae60;
-  color: white;
+  font-size: 1.1rem;
   border: none;
   border-radius: 10px;
-  font-size: 1rem;
+  background-color: #27ae60;
+  color: white;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 button:hover {
   background-color: #219150;
 }
 
-
-button + button {
-  margin-left: 10px;
+#liczniki {
+  margin-top: 30px;
+  text-align: center;
 }
 
-
-.ultra {
-  margin-top: 20px;
+#liczniki p {
   font-weight: bold;
-  color: #e74c3c;
+  margin: 6px 0;
 }
+
