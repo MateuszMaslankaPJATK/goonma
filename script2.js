@@ -40,10 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
   imgElement.src = selected.src;
   szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
 
-  // Data losowania
-  const now = new Date();
-  dataElement.textContent = "Data losowania: " + now.toLocaleString();
-
   // Unikalny kod losowania
   const kod = [...Array(10)].map(() => Math.random().toString(36)[2].toUpperCase()).join("");
   kodElement.textContent = "Kod potwierdzający: " + kod;
