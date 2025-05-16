@@ -9,33 +9,53 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      width: 100%;
       font-family: sans-serif;
+      background-color: black;
     }
 
-    body {
-      background: url('images/logo.png') no-repeat center top;
-      background-size: cover;
-      background-attachment: fixed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .container img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .tekst {
-      background-color: rgba(0, 0, 0, 0.5); /* półprzezroczyste tło */
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(0, 0, 0, 0.6);
       color: white;
       padding: 20px;
       border-radius: 12px;
-      max-width: 90%;
+      text-align: center;
       font-size: 1.1rem;
     }
   </style>
 </head>
 <body>
-  <div class="tekst">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet, magna non hendrerit efficitur, purus tellus pulvinar leo, a fermentum velit risus ac elit. Vivamus iaculis urna sed bibendum laoreet.
+
+  <div class="container">
+    <img src="images/logo.png" alt="GOONMA – O nas" />
+    <div class="tekst">
+      Lorem ipsum dolor sit amet
+      consectetur adipiscing elit. Nullam imperdiet, magna non hendrerit efficitur.
+      GÓWNO
+      EJ EJ EJ MAŁAAAAA
+      GOOOONMA??? CHYBA GOOOWNO HAHAHAHAHAHA
+
+      MMM MMMMMM MM MMMMMM MMMM MMM MM
+    </div>
   </div>
+
 </body>
 </html>
