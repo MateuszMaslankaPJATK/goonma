@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GOONMA Losowanie</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
 <body>
   <div class="container">
     <h1><span class="highlight">WYLOSUJ</span> SWOJĄ GOONMĘ</h1>
-    <div id="liczniki" style="margin-top: 30px;"></div>
 
-    <div class="button-group">
-      
+    <!-- PRZYCISKI NA GÓRZE -->
+    <div class="button-wrapper">
       <button onclick="window.location.href='result.html'">LOSUJ</button>
-      <button onclick="window.location.href='Karty.html'">WSZYTSKIE KARTY</button>
-      <button onclick="window.location.href='statystyki.html'">📊 STATYSTYKI</button>
-
+      <button onclick="window.location.href='Karty.html'">WSZYSTKIE KARTY</button>
+      <button onclick="window.location.href='statystyki.html'">STATYSTYKI</button>
+      <button onclick="window.location.href='informacje.html'">O NASZYM PRODUKCIE</button>
     </div>
+
+    <!-- STATYSTYKI NIŻEJ -->
+    <div id="liczniki"></div>
   </div>
+
   <script>
-  const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
-  const total = stats.total || 0;
+    const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+    const total = stats.total || 0;
 
-  const kolory = ["Green", "Blue", "Red", "Yellow", "Mythic"];
-  let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
+    const kolory = ["Green", "Blue", "Red", "Yellow", "Mythic"];
+    let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
 
-  kolory.forEach(kolor => {
-    const count = stats[kolor] || 0;
-    const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
-    html += `<p>Karta <strong>${kolor}</strong> wypadła <strong>${count}</strong> razy (${procent}%)</p>`;
-  });
+    kolory.forEach(kolor => {
+      const count = stats[kolor] || 0;
+      const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
+      html += `<p>Karta ${kolor} wypadła ${count} razy (${procent}%)</p>`;
+    });
 
-  document.getElementById("liczniki").innerHTML = html;
-</script>
-
+    document.getElementById("liczniki").innerHTML = html;
+  </script>
 </body>
-</html>
