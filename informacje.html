@@ -8,16 +8,15 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: sans-serif;
       background-color: black;
     }
 
     .container {
-      position: relative;
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .container img {
@@ -28,7 +27,7 @@
 
     .tekst {
       position: absolute;
-      top: 15%;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -39,23 +38,14 @@
       border-radius: 12px;
       text-align: center;
       font-size: 1.1rem;
+      z-index: 2;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <img src="images/logo.png" alt="GOONMA – O nas" />
-    <div class="tekst">
-      Lorem ipsum dolor sit amet
-      consectetur adipiscing elit. Nullam imperdiet, magna non hendrerit efficitur.
-      GÓWNO
-      EJ EJ EJ MAŁAAAAA
-      GOOOONMA??? CHYBA GOOOWNO HAHAHAHAHAHA
-
-      MMM MMMMMM MM MMMMMM MMMM MMM MM
-    </div>
+    <img src="images/logo.png" alt="GOONMA – o nas" />
   </div>
-
 </body>
 </html>
+
