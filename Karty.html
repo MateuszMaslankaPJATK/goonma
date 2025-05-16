@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wszystkie Karty GOONMA</title>
+  <title>Karty GOONMA</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 20px;
       padding: 20px;
     }
 
     .card-grid img {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      transition: transform 0.3s;
     }
 
     .card-grid img:hover {
@@ -26,25 +26,21 @@
 
     .card-grid p {
       text-align: center;
+      margin-top: 8px;
       font-weight: bold;
-      margin-top: 5px;
+      text-transform: uppercase;
     }
 
-    .lightbox {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      display: none;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
+    .back-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -52,42 +48,36 @@
   <div class="container">
     <h1>WSZYSTKIE KARTY GOONMA</h1>
     <div class="card-grid" id="karty"></div>
-  </div>
-
-  <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
-    <img src="" alt="Podgląd karty" id="lightbox-img" />
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ Wróć</button>
   </div>
 
   <script>
     const karty = [
       { src: "images/Green_1.png", chance: "64.9%" },
-      { src: "images/Blue_2.png", chance: "20%" },
+      { src: "images/Green_2.png", chance: "64.9%" },
+      { src: "images/Blue_1.png", chance: "20%" },
       { src: "images/Red_1.png", chance: "10%" },
       { src: "images/Yellow_1.png", chance: "5%" },
-      { src: "images/Mythic.png", chance: "0.1%" },
-      // Dodaj więcej kart tutaj
+      { src: "images/Mythic.png", chance: "0.1%" }
     ];
 
-    const grid = document.getElementById('karty');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    const grid = document.getElementById("karty");
 
     karty.forEach(card => {
-      const wrapper = document.createElement('div');
-      const img = document.createElement('img');
+      const wrapper = document.createElement("div");
+      const img = document.createElement("img");
       img.src = card.src;
-      img.alt = "Karta";
-      img.onclick = () => {
-        lightboxImg.src = card.src;
-        lightbox.style.display = "flex";
-      };
+      img.alt = "Karta GOONMA";
+      img.onclick = () => window.open(card.src, "_blank");
 
-      const chance = document.createElement('p');
-      chance.textContent = `Szansa: ${card.chance}`;
+      const label = document.createElement("p");
+      label.textContent = `Szansa: ${card.chance}`;
+
       wrapper.appendChild(img);
-      wrapper.appendChild(chance);
+      wrapper.appendChild(label);
       grid.appendChild(wrapper);
     });
   </script>
 </body>
 </html>
+
