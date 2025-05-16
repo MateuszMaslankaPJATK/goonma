@@ -60,6 +60,12 @@ button:hover {
   transform: scale(1.05);
 }
 
+
+button + button {
+  margin-left: 10px;
+}
+
+
 .ultra {
   margin-top: 20px;
   font-weight: bold;
