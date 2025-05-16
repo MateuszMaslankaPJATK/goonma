@@ -7,29 +7,53 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background: #f2fff2;
+      background: #eaffea;
       font-family: sans-serif;
       padding: 20px;
+      margin: 0;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     h1 {
+      font-size: 1.6rem;
       text-align: center;
-      margin-bottom: 30px;
+      margin: 0;
+    }
+
+    .completion {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 5px;
+      text-align: center;
     }
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 12px;
     }
 
     .card-wrapper {
       position: relative;
+      text-align: center;
     }
 
     .card-wrapper img {
       width: 100%;
       border-radius: 10px;
+    }
+
+    .card-wrapper p {
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 0.8rem;
     }
 
     .overlay {
@@ -39,7 +63,7 @@
       background-color: rgba(0, 0, 0, 0.6);
       color: white;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 0.85rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -47,9 +71,7 @@
     }
 
     .back-button {
-      display: block;
-      margin: 30px auto 0;
-      padding: 10px 20px;
+      padding: 8px 16px;
       font-size: 1rem;
       background-color: #27ae60;
       color: white;
@@ -57,22 +79,17 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
-    .card-wrapper p {
-      text-align: center;
-      margin-top: 5px;
-      font-weight: bold;
-      font-size: 0.85rem;
-    }
   </style>
 </head>
 <body>
 
-  <h1>STATYSTYKI TWOICH KART</h1>
+  <header>
+    <h1>STATYSTYKI TWOICH KART</h1>
+    <div class="completion" id="completionText">Ukończono: 0 z 16 kart</div>
+    <button class="back-button" onclick="window.location.href='index.html'">⬅ POWRÓT</button>
+  </header>
 
   <div class="card-grid" id="cardStats"></div>
-
-  <button class="back-button" onclick="window.location.href='index.html'">⬅ POWRÓT</button>
 
   <script>
     const karty = [
@@ -86,6 +103,8 @@
     const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
     const total = stats.total || 0;
     const container = document.getElementById("cardStats");
+
+    let trafione = 0;
 
     karty.forEach(karta => {
       const wrapper = document.createElement("div");
@@ -107,10 +126,18 @@
         overlay.classList.add("overlay");
         overlay.textContent = "BRAK";
         wrapper.appendChild(overlay);
+      } else {
+        trafione++;
       }
 
       container.appendChild(wrapper);
     });
+
+    const completionText = document.getElementById("completionText");
+    const procentUkonczone = ((trafione / karty.length) * 100).toFixed(1);
+    completionText.textContent = `Ukończono: ${trafione} z ${karty.length} kart (${procentUkonczone}%)`;
   </script>
+
 </body>
 </html>
+
