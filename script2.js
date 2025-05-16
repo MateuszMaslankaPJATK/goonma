@@ -44,4 +44,21 @@ window.onload = function () {
   if (selected.chance <= 0.1) {
     document.querySelector('.ultra').classList.add('flash');
   }
+  // Data losowania
+const dataElement = document.getElementById("data");
+const now = new Date();
+dataElement.textContent = "Data losowania: " + now.toLocaleString();
+
+// Unikalny kod losowania
+const kodElement = document.getElementById("kod");
+const kod = [...Array(10)]
+  .map(() => Math.random().toString(36)[2].toUpperCase())
+  .join("");
+kodElement.textContent = "Kod potwierdzający: " + kod;
+
+// Pokaż komunikat, jeśli ultra rare
+if (selected.chance <= 0.1) {
+  document.querySelector(".ultra").style.display = "block";
+}
+
 };
