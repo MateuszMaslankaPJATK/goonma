@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wszystkie Karty GOONMA</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card-grid img {
+      width: 100%;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .card-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    .card-grid p {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      display: none;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>WSZYSTKIE KARTY GOONMA</h1>
+    <div class="card-grid" id="karty"></div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+    <img src="" alt="Podgląd karty" id="lightbox-img" />
+  </div>
+
+  <script>
+    const karty = [
+      { src: "images/Green_1.png", chance: "64.9%" },
+      { src: "images/Blue_2.png", chance: "20%" },
+      { src: "images/Red_1.png", chance: "10%" },
+      { src: "images/Yellow_1.png", chance: "5%" },
+      { src: "images/Mythic.png", chance: "0.1%" },
+      // Dodaj więcej kart tutaj
+    ];
+
+    const grid = document.getElementById('karty');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    karty.forEach(card => {
+      const wrapper = document.createElement('div');
+      const img = document.createElement('img');
+      img.src = card.src;
+      img.alt = "Karta";
+      img.onclick = () => {
+        lightboxImg.src = card.src;
+        lightbox.style.display = "flex";
+      };
+
+      const chance = document.createElement('p');
+      chance.textContent = `Szansa: ${card.chance}`;
+      wrapper.appendChild(img);
+      wrapper.appendChild(chance);
+      grid.appendChild(wrapper);
+    });
+  </script>
+</body>
+</html>
