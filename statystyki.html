@@ -1,103 +1,44 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Statystyki GOONMA</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background: #f2fff2;
-      font-family: sans-serif;
-      padding: 20px;
+<script>
+  const karty = [
+    "Green_1.png", "Green_2.png", "Green_3.png", "Green_4.png", "Green_5.png", "Green_6.png",
+    "Blue_1.png", "Blue_2.png", "Blue_3.png", "Blue_4.png",
+    "Red_1.png", "Red_2.png", "Red_3.png",
+    "Yellow_1.png", "Yellow_2.png",
+    "Mythic.png"
+  ];
+
+  const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+  const total = stats.total || 0;
+  const container = document.getElementById("cardStats");
+
+  karty.forEach(karta => {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("card-wrapper");
+
+    const img = document.createElement("img");
+    img.src = `images/${karta}`;
+    wrapper.appendChild(img);
+
+    const ile = stats[karta] || 0;
+    const procent = total > 0 ? ((ile / total) * 100).toFixed(1) : "0.0";
+
+    // Opis pod kartą
+    const opis = document.createElement("p");
+    opis.style.textAlign = "center";
+    opis.style.marginTop = "5px";
+    opis.style.fontWeight = "bold";
+    opis.style.fontSize = "0.85rem";
+    opis.textContent = `${ile} trafień (${procent}%)`;
+    wrapper.appendChild(opis);
+
+    if (ile === 0) {
+      const overlay = document.createElement("div");
+      overlay.classList.add("overlay");
+      overlay.textContent = "BRAK";
+      wrapper.appendChild(overlay);
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+    container.appendChild(wrapper);
+  });
+</script>
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-    }
-
-    .card-wrapper {
-      position: relative;
-    }
-
-    .card-wrapper img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-    }
-
-    .back-button {
-      display: block;
-      margin: 30px auto 0;
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>STATYSTYKI TWOICH KART</h1>
-
-  <div class="card-grid" id="cardStats"></div>
-
-  <button class="back-button" onclick="window.location.href='index.html'">⬅ POWRÓT</button>
-
-  <script>
-    const karty = [
-      "Green_1.png", "Green_2.png", "Green_3.png", "Green_4.png", "Green_5.png", "Green_6.png",
-      "Blue_1.png", "Blue_2.png", "Blue_3.png", "Blue_4.png",
-      "Red_1.png", "Red_2.png", "Red_3.png",
-      "Yellow_1.png", "Yellow_2.png",
-      "Mythic.png"
-    ];
-
-    const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
-    const container = document.getElementById("cardStats");
-
-    karty.forEach(karta => {
-      const wrapper = document.createElement("div");
-      wrapper.classList.add("card-wrapper");
-
-      const img = document.createElement("img");
-      img.src = `images/${karta}`;
-      wrapper.appendChild(img);
-
-      const ile = stats[karta] || 0;
-
-      if (ile === 0) {
-        const overlay = document.createElement("div");
-        overlay.classList.add("overlay");
-        overlay.textContent = "BRAK";
-        wrapper.appendChild(overlay);
-      }
-
-      container.appendChild(wrapper);
-    });
-  </script>
-</body>
-</html>
