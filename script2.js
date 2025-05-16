@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   const images = [
-    { src: "images/Green_1.png", chance: 64.9 },
-    { src: "images/Green_2.png", chance: 64.9 },
-    { src: "images/Green_3.png", chance: 64.9 },
-    { src: "images/Green_4.png", chance: 64.9 },
-    { src: "images/Green_5.png", chance: 64.9 },
-    { src: "images/Green_6.png", chance: 64.9 },
+    { src: "images/Green_1.png", chance: 70 },
+    { src: "images/Green_2.png", chance: 70 },
+    { src: "images/Green_3.png", chance: 70 },
+    { src: "images/Green_4.png", chance: 70 },
+    { src: "images/Green_5.png", chance: 70 },
+    { src: "images/Green_6.png", chance: 70 },
     { src: "images/Blue_1.png", chance: 20 },
     { src: "images/Blue_2.png", chance: 20 },
     { src: "images/Blue_3.png", chance: 20 },
@@ -39,6 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   imgElement.src = selected.src;
   szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
+
+  // Dodaj efekt flash jeśli karta nie jest zielona
+const kolorKarty = selected.src.split("/").pop().split("_")[0];
+if (kolorKarty !== "Green") {
+  imgElement.classList.add("flash");
+}
 
   // Unikalny kod losowania
   const kod = [...Array(10)].map(() => Math.random().toString(36)[2].toUpperCase()).join("");
