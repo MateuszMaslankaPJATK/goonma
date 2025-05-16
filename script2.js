@@ -51,4 +51,23 @@ document.addEventListener("DOMContentLoaded", function () {
   if (selected.chance <= 0.1) {
     document.querySelector(".ultra").style.display = "block";
   }
+  {// Pobierz istniejące statystyki
+const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+const fileName = selected.src.split("/").pop();
+
+// Zlicz konkretną kartę
+stats[fileName] = (stats[fileName] || 0) + 1;
+
+// Zlicz ogólnie liczbę losowań
+stats["total"] = (stats["total"] || 0) + 1;
+
+// Kolor na podstawie nazwy pliku
+let kolor = fileName.split("_")[0]; // Green, Blue, Red...
+if (fileName === "Mythic.png") kolor = "Mythic";
+
+stats[kolor] = (stats[kolor] || 0) + 1;
+
+// Zapisz ponownie
+localStorage.setItem("goonma_stats", JSON.stringify(stats));
+}
 });
