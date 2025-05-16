@@ -3,24 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GOONMA – Wynik</title>
+  <title>GOONMA</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #eaffea;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .result-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    #wynik {
+      width: 90%;
+      max-width: 360px;
+      height: auto;
+      display: block;
+      margin: 0 auto 15px;
+      border-radius: 10px;
+    }
+
+    .info-text {
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .ultra {
+      color: #e74c3c;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    button {
+      width: 80%;
+      max-width: 250px;
+      padding: 12px;
+      margin: 10px auto;
+      display: block;
+      font-size: 1rem;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+  </style>
   <script src="script2.js" defer></script>
 </head>
 <body>
-  <div class="container">
+  <div class="result-container">
     <img id="wynik" src="" alt="Wylosowany obrazek" />
 
-    <p id="szansa" class="big-text"></p>
-    <p id="kod" class="big-text"></p>
+    <p id="szansa" class="info-text">SZANSA NA TĘ KARTĘ WYNOSIŁA: ...</p>
+    <p id="kod" class="info-text">KOD POTWIERDZAJĄCY: ...</p>
 
     <div class="ultra" style="display: none;">
-      <p class="highlight">!!!!! ULTRA RARE KARTA !!!!!</p>
+       ULTRA RARE KARTA! 
     </div>
 
     <button onclick="window.location.reload()">LOSUJ PONOWNIE</button>
     <button onclick="window.location.href='index.html'">POWRÓT</button>
-
   </div>
 </body>
 </html>
