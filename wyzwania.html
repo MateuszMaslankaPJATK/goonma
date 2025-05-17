@@ -63,65 +63,146 @@
   <div id="lista-wyzwan"></div>
 
   <script>
-    const cooldownSekundy = 10;
-    const ostatniWejscie = localStorage.getItem("goonma_wyzwania_last_open");
-    const teraz = Date.now();
-
-    if (ostatniWejscie && (teraz - parseInt(ostatniWejscie)) < cooldownSekundy * 1000) {
-      const sekundyPozostale = Math.ceil((cooldownSekundy * 1000 - (teraz - parseInt(ostatniWejscie))) / 1000);
-      alert(`Odczekaj ${sekundyPozostale} sek. przed ponownym otwarciem strony wyzwań.`);
-      window.location.href = "index.html";
-    } else {
-      localStorage.setItem("goonma_wyzwania_last_open", teraz.toString());
-    }
+    
 
     const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
     const total = stats.total || 0;
     const greenStreak = parseInt(localStorage.getItem("goonma_green_streak")) || 0;
 
     const kategorie = {
-      "Początkujący": [
-        {
-          nazwa: "Pierwszy krok",
-          opis: "Wylosuj pierwszą kartę.",
-          postep: () => total >= 1 ? 100 : 0
-        },
-        {
-          nazwa: "Zielony start",
-          opis: "Traf 5 kart zielonych.",
-          postep: () => Math.min((stats.Green || 0) / 5 * 100, 100)
-        },
-        {
-          nazwa: "Seria",
-          opis: "Traf 3 zielone karty pod rząd.",
-          postep: () => greenStreak >= 3 ? 100 : 0
-        },
-        {
-          nazwa: "10 losowań",
-          opis: "Wylosuj 10 kart.",
-          postep: () => Math.min(total / 10 * 100, 100)
-        }
-      ],
-      "Kolekcjoner": [
-        {
-          nazwa: "GOON kolekcja",
-          opis: "Traf kartę każdego koloru.",
-          postep: () => {
-            const kolory = ["Green", "Blue", "Red", "Yellow"];
-            const trafione = kolory.filter(k => stats[k] > 0).length;
-            return Math.min(trafione / kolory.length * 100, 100);
-          }
-        },
-        {
-          nazwa: "Fuks",
-          opis: "Traf jedną kartę Holo.",
-          postep: () => {
-            const holoKeys = Object.keys(stats).filter(k => k.includes("holo"));
-            return holoKeys.some(k => stats[k] > 0) ? 100 : 0;
-          }
-        }
-      ]
-    };
+  "Początkujący": [
+    {
+      nazwa: "Pierwszy krok",
+      opis: "Wylosuj pierwszą kartę.",
+      postep: () => total >= 1 ? 100 : 0
+    },
+    {
+      nazwa: "Zielony start",
+      opis: "Traf 5 kart zielonych.",
+      postep: () => Math.min((stats.Green || 0) / 5 * 100, 100)
+    },
+    {
+      nazwa: "Seria",
+      opis: "Traf 3 zielone karty pod rząd.",
+      postep: () => greenStreak >= 3 ? 100 : 0
+    },
+    {
+      nazwa: "10 losowań",
+      opis: "Wylosuj 10 kart.",
+      postep: () => Math.min(total / 10 * 100, 100)
+    }
+  ],
+  "Kolekcjoner": [
+    {
+      nazwa: "GOON kolekcja",
+      opis: "Traf kartę każdego koloru.",
+      postep: () => {
+        const kolory = ["Green", "Blue", "Red", "Yellow"];
+        const trafione = kolory.filter(k => stats[k] > 0).length;
+        return Math.min(trafione / kolory.length * 100, 100);
+      }
+    },
+    {
+      nazwa: "Fuks",
+      opis: "Traf jedną kartę Holo.",
+      postep: () => Object.keys(stats).some(k => k.includes("holo") && stats[k] > 0) ? 100 : 0
+    },
+    {
+      nazwa: "Holo x2",
+      opis: "Traf dwie różne karty Holo.",
+      postep: () => Object.keys(stats).filter(k => k.includes("holo") && stats[k] > 0).length >= 2 ? 100 : 0
+    },
+    {
+      nazwa: "50 losowań",
+      opis: "Wylosuj 50 kart.",
+      postep: () => Math.min(total / 50 * 100, 100)
+    }
+  ],
+  "Zaawansowany": [
+    {
+      nazwa: "Zielona dominacja",
+      opis: "Traf 20 zielonych kart pod rząd.",
+      postep: () => greenStreak >= 20 ? 100 : 0
+    },
+    {
+      nazwa: "Monosig!",
+      opis: "Traf jedną kartę Monosig.",
+      postep: () => Object.keys(stats).some(k => k.includes("monosig") && stats[k] > 0) ? 100 : 0
+    },
+    {
+      nazwa: "Podpisany zestaw",
+      opis: "Traf trzy różne karty Monosig.",
+      postep: () => Object.keys(stats).filter(k => k.includes("monosig") && stats[k] > 0).length >= 3 ? 100 : 0
+    },
+    {
+      nazwa: "Holo Master",
+      opis: "Traf wszystkie karty Holo.",
+      postep: () => {
+        const holoList = [
+          "blue1_holo.png", "blue2_holo.png", "blue3_holo.png", "blue4_holo.png",
+          "red1_holo.png", "red2_holo.png", "red3_holo.png",
+          "Yellow1_holo.png", "Yellow2_holo.png"
+        ];
+        const trafione = holoList.filter(k => stats[k] > 0).length;
+        return Math.min(trafione / holoList.length * 100, 100);
+      }
+    },
+    {
+      nazwa: "Szczęśliwy mix",
+      opis: "Traf Yellow_holo i Mythic w tej samej sesji.",
+      postep: () => (stats["Yellow1_holo.png"] || stats["Yellow2_holo.png"]) > 0 && stats["Mythic.png"] > 0 ? 100 : 0
+    }
+  ],
+  "Ekspert": [
+    {
+      nazwa: "100 losowań",
+      opis: "Wylosuj 100 kart.",
+      postep: () => Math.min(total / 100 * 100, 100)
+    },
+    {
+      nazwa: "Legenda",
+      opis: "Traf kartę Mythic.",
+      postep: () => stats["Mythic.png"] > 0 ? 100 : 0
+    },
+    {
+      nazwa: "Trio mocy",
+      opis: "Traf 1 Monosig, 1 Holo i 1 Mythic w jednej sesji.",
+      postep: () => {
+        const hasMonosig = Object.keys(stats).some(k => k.includes("monosig") && stats[k] > 0);
+        const hasHolo = Object.keys(stats).some(k => k.includes("holo") && stats[k] > 0);
+        const hasMythic = stats["Mythic.png"] > 0;
+        return (hasMonosig && hasHolo && hasMythic) ? 100 : 0;
+      }
+    },
+    {
+      nazwa: "GOONMA Pełna Kolekcja",
+      opis: "Zdobądź wszystkie 33 karty.",
+      postep: () => {
+        const allCards = [
+          "Green_1.png", "Green_2.png", "Green_3.png", "Green_4.png", "Green_5.png", "Green_6.png",
+          "Blue_1.png", "Blue_2.png", "Blue_3.png", "Blue_4.png",
+          "Red_1.png", "Red_2.png", "Red_3.png",
+          "Yellow_1.png", "Yellow_2.png",
+          "blue1_holo.png", "blue2_holo.png", "blue3_holo.png", "blue4_holo.png",
+          "red1_holo.png", "red2_holo.png", "red3_holo.png",
+          "Yellow1_holo.png", "Yellow2_holo.png",
+          "Yellow1_monosig.png", "red2_monosig.png", "blue2_monosig.png", "green1_monosig.png",
+          "Mythic.png"
+        ];
+        const trafione = allCards.filter(k => stats[k] > 0).length;
+        return Math.min(trafione / allCards.length * 100, 100);
+      }
+    },
+    {
+      nazwa: "10 Monosigów",
+      opis: "Traf łącznie 10 kart Monosig.",
+      postep: () => {
+        const suma = Object.keys(stats).filter(k => k.includes("monosig")).reduce((a, b) => a + stats[b], 0);
+        return Math.min(suma / 10 * 100, 100);
+      }
+    }
+  ]
+};
 
     const kontener = document.getElementById("lista-wyzwan");
 
