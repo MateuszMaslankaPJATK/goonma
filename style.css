@@ -1,3 +1,7 @@
+from pathlib import Path
+
+# Pełna zawartość pliku style.css
+css_code = """
 .container {
   text-align: center;
   padding: 20px;
@@ -10,6 +14,7 @@
   gap: 12px;
   margin-bottom: 30px;
 }
+
 button.losuj {
   background-color: #2ecc71;
   font-size: 1.3rem;
@@ -23,6 +28,7 @@ button.losuj:hover {
   background-color: #27ae60;
   transform: scale(1.05);
 }
+
 button {
   width: 80%;
   max-width: 280px;
@@ -62,6 +68,8 @@ footer h2 {
   margin-bottom: 12px;
   font-size: 1.2rem;
 }
+
+/* Efekt flash dla rzadkich kart */
 .flash {
   animation: flash 1s infinite alternate;
 }
@@ -76,3 +84,32 @@ footer h2 {
     filter: brightness(1.2);
   }
 }
+
+/* Efekt flip-in dla kart */
+#wynik {
+  transform: rotateY(90deg);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+#wynik.flip-in {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+/* Styl dla kart Holo i Monosig */
+img[src*="holo"] {
+  box-shadow: 0 0 10px #00ffff;
+}
+
+img[src*="monosig"] {
+  box-shadow: 0 0 10px #ff00cc;
+  border: 2px solid white;
+}
+"""
+
+# Zapisz do pliku
+path = Path("/mnt/data/style.css")
+path.write_text(css_code)
+
+path.name
