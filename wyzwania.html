@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyzwania GOONMA</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #f2fff2;
+      font-family: sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .challenge {
+      margin-bottom: 25px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .challenge-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #27ae60;
+      text-align: center;
+      color: white;
+      font-size: 0.8rem;
+      line-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>WYZWANIA GOONMA</h1>
+
+  <div id="lista-wyzwan"></div>
+
+  <script>
+    const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+    const total = stats.total || 0;
+
+    const wyzwania = [
+      {
+        id: "wylosuj_1",
+        nazwa: "Pierwszy krok",
+        opis: "Wylosuj pierwszą kartę.",
+        postep: () => Math.min((total >= 1 ? 1 : 0) * 100, 100)
+      },
+      {
+        id: "zielone_5",
+        nazwa: "Zielony start",
+        opis: "Traf 5 kart zielonych.",
+        postep: () => {
+          const zielone = stats.Green || 0;
+          return Math.min((zielone / 5) * 100, 100);
+        }
+      },
+      {
+        id: "zielone_3_z_rzedu",
+        nazwa: "Seria",
+        opis: "Traf 3 zielone karty pod rząd.",
+        postep: () => parseInt(localStorage.getItem("goonma_green_streak")) >= 3 ? 100 : 0
+      },
+      {
+        id: "traf_10",
+        nazwa: "10 losowań",
+        opis: "Wylosuj 10 kart.",
+        postep: () => Math.min((total / 10) * 100, 100)
+      }
+    ];
+
+    const kontener = document.getElementById("lista-wyzwan");
+
+    wyzwania.forEach(wyzwanie => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "challenge";
+
+      const tytul = document.createElement("div");
+      tytul.className = "challenge-title";
+      tytul.textContent = `${wyzwanie.nazwa} – ${wyzwanie.opis}`;
+
+      const bar = document.createElement("div");
+      bar.className = "progress-bar";
+
+      const fill = document.createElement("div");
+      fill.className = "progress-fill";
+      const procent = wyzwanie.postep().toFixed(0);
+      fill.style.width = procent + "%";
+      fill.textContent = procent + "%";
+
+      bar.appendChild(fill);
+      wrapper.appendChild(tytul);
+      wrapper.appendChild(bar);
+      kontener.appendChild(wrapper);
+    });
+  </script>
+</body>
+</html>
