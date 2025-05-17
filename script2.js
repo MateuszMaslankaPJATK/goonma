@@ -1,3 +1,7 @@
+from pathlib import Path
+
+# Ponowne utworzenie pliku po resecie stanu
+js_code = """
 document.addEventListener("DOMContentLoaded", function () {
   const images = [
     { src: "images/Green_1.png", chance: 70 },
@@ -29,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { src: "images/Yellow1_monosig.png", chance: 0.5 },
     { src: "images/red2_monosig.png", chance: 0.5 },
     { src: "images/blue2_monosig.png", chance: 0.5 },
-    { src: "images/green1_monosig.png", chance: 0.5 }
+    { src: "images/green1_monosig.png", chance: 0.5 },
     //mityczna
     { src: "images/Mythic.png", chance: 0.1 }
   ];
@@ -55,15 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   imgElement.src = selected.src;
   imgElement.onload = function () {
-  imgElement.classList.add("flip-in");
-};
+    imgElement.classList.add("flip-in");
+  };
   szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
 
   // Dodaj efekt flash jeśli karta nie jest zielona
-const kolorKarty = selected.src.split("/").pop().split("_")[0];
-if (kolorKarty !== "Green") {
-  imgElement.classList.add("flash");
-}
+  const kolorKarty = selected.src.split("/").pop().split("_")[0];
+  if (kolorKarty !== "Green") {
+    imgElement.classList.add("flash");
+  }
 
   // Unikalny kod losowania
   const kod = [...Array(10)].map(() => Math.random().toString(36)[2].toUpperCase()).join("");
@@ -76,23 +80,20 @@ if (kolorKarty !== "Green") {
   if (selected.chance <= 0.1) {
     document.querySelector(".ultra").style.display = "block";
   }
-  {// Pobierz istniejące statystyki
-const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
-const fileName = selected.src.split("/").pop();
 
-// Zlicz konkretną kartę
-stats[fileName] = (stats[fileName] || 0) + 1;
-
-// Zlicz ogólnie liczbę losowań
-stats["total"] = (stats["total"] || 0) + 1;
-
-// Kolor na podstawie nazwy pliku
-let kolor = fileName.split("_")[0]; // Green, Blue, Red...
-if (fileName === "Mythic.png") kolor = "Mythic";
-
-stats[kolor] = (stats[kolor] || 0) + 1;
-
-// Zapisz ponownie
-localStorage.setItem("goonma_stats", JSON.stringify(stats));
-}
+  // Statystyki lokalne
+  const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+  const fileName = selected.src.split("/").pop();
+  stats[fileName] = (stats[fileName] || 0) + 1;
+  stats["total"] = (stats["total"] || 0) + 1;
+  let kolor = fileName.split("_")[0];
+  if (fileName === "Mythic.png") kolor = "Mythic";
+  stats[kolor] = (stats[kolor] || 0) + 1;
+  localStorage.setItem("goonma_stats", JSON.stringify(stats));
 });
+"""
+
+path = Path("/mnt/data/script2.js")
+path.write_text(js_code)
+
+path.name
