@@ -147,13 +147,14 @@
         return Math.min(trafione / holoList.length * 100, 100);
       }
     },
-    {
-      nazwa: "Szczęśliwy mix",
-      opis: "Traf Yellow_holo i Mythic w tej samej sesji.",
-      postep: () => (stats["Yellow1_holo.png"] || stats["Yellow2_holo.png"]) > 0 && stats["Mythic.png"] > 0 ? 100 : 0
-    }
+  
   ],
   "Ekspert": [
+    {
+  nazwa: "Maratończyk",
+  opis: "Wylosuj 5000 kart.",
+  postep: () => Math.min((total / 5000) * 100, 100)
+}
     {
       nazwa: "100 losowań",
       opis: "Wylosuj 100 kart.",
