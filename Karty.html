@@ -52,23 +52,26 @@
   </div>
 
   <script>
-    const karty = [
-      { src: "images/Green_1.png", chance: "64.9%" },
-      { src: "images/Green_2.png", chance: "64.9%" },
-      { src: "images/Green_3.png", chance: "64.9%" },
-      { src: "images/Green_4.png", chance: "64.9%" },
-      { src: "images/Green_5.png", chance: "64.9%" },
-      { src: "images/Green_6.png", chance: "64.9%" },
-      { src: "images/Blue_1.png", chance: "20%" },
-      { src: "images/Blue_2.png", chance: "20%" },
-      { src: "images/Blue_3.png", chance: "20%" },
-      { src: "images/Blue_4.png", chance: "20%" },
-      { src: "images/Red_1.png", chance: "10%" },
-      { src: "images/Red_2.png", chance: "10%" },
-      { src: "images/Red_3.png", chance: "10%" },
-      { src: "images/Yellow_1.png", chance: "5%" },
-      { src: "images/Yellow_2.png", chance: "5%" },
-      { src: "images/blue1_holo.png", chance: "5%" },
+  const zwykle = [
+    { src: "images/Green_1.png", chance: "64.9%" },
+    { src: "images/Green_2.png", chance: "64.9%" },
+    { src: "images/Green_3.png", chance: "64.9%" },
+    { src: "images/Green_4.png", chance: "64.9%" },
+    { src: "images/Green_5.png", chance: "64.9%" },
+    { src: "images/Green_6.png", chance: "64.9%" },
+    { src: "images/Blue_1.png", chance: "20%" },
+    { src: "images/Blue_2.png", chance: "20%" },
+    { src: "images/Blue_3.png", chance: "20%" },
+    { src: "images/Blue_4.png", chance: "20%" },
+    { src: "images/Red_1.png", chance: "10%" },
+    { src: "images/Red_2.png", chance: "10%" },
+    { src: "images/Red_3.png", chance: "10%" },
+    { src: "images/Yellow_1.png", chance: "5%" },
+    { src: "images/Yellow_2.png", chance: "5%" }
+  ];
+
+  const holo = [
+    { src: "images/blue1_holo.png", chance: "5%" },
     { src: "images/blue2_holo.png", chance: "5%" },
     { src: "images/blue3_holo.png", chance: "5%" },
     { src: "images/blue4_holo.png", chance: "5%" },
@@ -76,31 +79,39 @@
     { src: "images/red2_holo.png", chance: "2%" },
     { src: "images/red3_holo.png", chance: "2%" },
     { src: "images/Yellow1_holo.png", chance: "1%" },
-    { src: "images/Yellow2_holo.png", chance: "1%" },
-    //z podpisem
+    { src: "images/Yellow2_holo.png", chance: "1%" }
+  ];
+
+  const monosig = [
     { src: "images/Yellow1_monosig.png", chance: "1 na 500" },
     { src: "images/red2_monosig.png", chance: "1 na 500" },
     { src: "images/blue2_monosig.png", chance: "1 na 500" },
     { src: "images/green1_monosig.png", chance: "1 na 500" }
+  ];
+
+  const mythic = [
     { src: "images/Mythic.png", chance: "1 na 1000" }
-    ];
+  ];
 
-    const grid = document.getElementById("karty");
+  const karty = [...zwykle, ...holo, ...monosig, ...mythic];
 
-    karty.forEach(card => {
-      const wrapper = document.createElement("div");
-      const img = document.createElement("img");
-      img.src = card.src;
-      img.alt = "Karta GOONMA";
-      img.onclick = () => window.open(card.src, "_blank");
+  const grid = document.getElementById("karty");
 
-      const label = document.createElement("p");
-      label.textContent = `Szansa: ${card.chance}`;
+  karty.forEach(card => {
+    const wrapper = document.createElement("div");
+    const img = document.createElement("img");
+    img.src = card.src;
+    img.alt = "Karta GOONMA";
+    img.onclick = () => window.open(card.src, "_blank");
 
-      wrapper.appendChild(img);
-      wrapper.appendChild(label);
-      grid.appendChild(wrapper);
-    });
-  </script>
+    const label = document.createElement("p");
+    label.textContent = `Szansa: ${card.chance}`;
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(label);
+    grid.appendChild(wrapper);
+  });
+</script>
+
 </body>
 </html>
