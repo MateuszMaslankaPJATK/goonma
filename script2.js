@@ -15,6 +15,22 @@ document.addEventListener("DOMContentLoaded", function () {
     { src: "images/Red_3.png", chance: 10 },
     { src: "images/Yellow_1.png", chance: 5 },
     { src: "images/Yellow_2.png", chance: 5 },
+    //hologramy
+    { src: "images/blue1_holo.png", chance: 5 },
+    { src: "images/blue2_holo.png", chance: 5 },
+    { src: "images/blue3_holo.png", chance: 5 },
+    { src: "images/blue4_holo.png", chance: 5 },
+    { src: "images/red1_holo.png", chance: 2 },
+    { src: "images/red2_holo.png", chance: 2 },
+    { src: "images/red3_holo.png", chance: 2 },
+    { src: "images/Yellow1_holo.png", chance: 1 },
+    { src: "images/Yellow2_holo.png", chance: 1 },
+    //z podpisem
+    { src: "images/Yellow1_monosig.png", chance: 0.5 },
+    { src: "images/red2_monosig.png", chance: 0.5 },
+    { src: "images/blue2_monosig.png", chance: 0.5 },
+    { src: "images/green1_monosig.png", chance: 0.5 }
+    //mityczna
     { src: "images/Mythic.png", chance: 0.1 }
   ];
 
