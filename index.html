@@ -75,16 +75,36 @@
   </div>
 
   <script>
-    const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
-    const total = stats.total || 0;
+  const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+  const total = stats.total || 0;
 
-    const kolory = ["Green", "Blue", "Red", "Yellow", "Mythic"];
-    let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
+  const kolory = ["Green", "Blue", "Red", "Yellow", "Mythic"];
+  let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
 
-    kolory.forEach(kolor => {
-      const count = stats[kolor] || 0;
-      const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
-      html += `<p>Karta ${kolor} wypadła ${count} razy (${procent}%)</p>`;
+  kolory.forEach(kolor => {
+    const count = stats[kolor] || 0;
+    const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
+    html += `<p>Karta ${kolor} wypadła ${count} razy (${procent}%)</p>`;
+  });
+
+  // Dodajemy HOLO
+  let holoCount = 0;
+  for (const key in stats) {
+    if (key.includes("holo")) holoCount += stats[key];
+  }
+  const holoProcent = total > 0 ? ((holoCount / total) * 100).toFixed(1) : "0.0";
+  html += `<p style="color:#00cccc">Karty Holo: ${holoCount} (${holoProcent}%)</p>`;
+
+  // Dodajemy MONOSIG
+  let monosigCount = 0;
+  for (const key in stats) {
+    if (key.includes("monosig")) monosigCount += stats[key];
+  }
+  const monosigProcent = total > 0 ? ((monosigCount / total) * 100).toFixed(1) : "0.0";
+  html += `<p style="color:#ff00cc">Karty Monosig: ${monosigCount} (${monosigProcent}%)</p>`;
+
+  document.getElementById("liczniki").innerHTML = html;
+</script>
 
 
     });
