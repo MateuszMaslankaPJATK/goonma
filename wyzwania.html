@@ -13,7 +13,7 @@
       margin: 0;
     }
 
-    h1 {
+    h1, h2 {
       text-align: center;
       margin-bottom: 20px;
     }
@@ -47,6 +47,14 @@
       font-size: 0.8rem;
       line-height: 20px;
     }
+
+    .category {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
   </style>
 </head>
 <body>
@@ -55,63 +63,97 @@
   <div id="lista-wyzwan"></div>
 
   <script>
+    const cooldownSekundy = 10;
+    const ostatniWejscie = localStorage.getItem("goonma_wyzwania_last_open");
+    const teraz = Date.now();
+
+    if (ostatniWejscie && (teraz - parseInt(ostatniWejscie)) < cooldownSekundy * 1000) {
+      const sekundyPozostale = Math.ceil((cooldownSekundy * 1000 - (teraz - parseInt(ostatniWejscie))) / 1000);
+      alert(`Odczekaj ${sekundyPozostale} sek. przed ponownym otwarciem strony wyzwań.`);
+      window.location.href = "index.html";
+    } else {
+      localStorage.setItem("goonma_wyzwania_last_open", teraz.toString());
+    }
+
     const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
     const total = stats.total || 0;
+    const greenStreak = parseInt(localStorage.getItem("goonma_green_streak")) || 0;
 
-    const wyzwania = [
-      {
-        id: "wylosuj_1",
-        nazwa: "Pierwszy krok",
-        opis: "Wylosuj pierwszą kartę.",
-        postep: () => Math.min((total >= 1 ? 1 : 0) * 100, 100)
-      },
-      {
-        id: "zielone_5",
-        nazwa: "Zielony start",
-        opis: "Traf 5 kart zielonych.",
-        postep: () => {
-          const zielone = stats.Green || 0;
-          return Math.min((zielone / 5) * 100, 100);
+    const kategorie = {
+      "Początkujący": [
+        {
+          nazwa: "Pierwszy krok",
+          opis: "Wylosuj pierwszą kartę.",
+          postep: () => total >= 1 ? 100 : 0
+        },
+        {
+          nazwa: "Zielony start",
+          opis: "Traf 5 kart zielonych.",
+          postep: () => Math.min((stats.Green || 0) / 5 * 100, 100)
+        },
+        {
+          nazwa: "Seria",
+          opis: "Traf 3 zielone karty pod rząd.",
+          postep: () => greenStreak >= 3 ? 100 : 0
+        },
+        {
+          nazwa: "10 losowań",
+          opis: "Wylosuj 10 kart.",
+          postep: () => Math.min(total / 10 * 100, 100)
         }
-      },
-      {
-        id: "zielone_3_z_rzedu",
-        nazwa: "Seria",
-        opis: "Traf 3 zielone karty pod rząd.",
-        postep: () => parseInt(localStorage.getItem("goonma_green_streak")) >= 3 ? 100 : 0
-      },
-      {
-        id: "traf_10",
-        nazwa: "10 losowań",
-        opis: "Wylosuj 10 kart.",
-        postep: () => Math.min((total / 10) * 100, 100)
-      }
-    ];
+      ],
+      "Kolekcjoner": [
+        {
+          nazwa: "GOON kolekcja",
+          opis: "Traf kartę każdego koloru.",
+          postep: () => {
+            const kolory = ["Green", "Blue", "Red", "Yellow"];
+            const trafione = kolory.filter(k => stats[k] > 0).length;
+            return Math.min(trafione / kolory.length * 100, 100);
+          }
+        },
+        {
+          nazwa: "Fuks",
+          opis: "Traf jedną kartę Holo.",
+          postep: () => {
+            const holoKeys = Object.keys(stats).filter(k => k.includes("holo"));
+            return holoKeys.some(k => stats[k] > 0) ? 100 : 0;
+          }
+        }
+      ]
+    };
 
     const kontener = document.getElementById("lista-wyzwan");
 
-    wyzwania.forEach(wyzwanie => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "challenge";
+    for (const kategoria in kategorie) {
+      const naglowek = document.createElement("div");
+      naglowek.className = "category";
+      naglowek.textContent = kategoria;
+      kontener.appendChild(naglowek);
 
-      const tytul = document.createElement("div");
-      tytul.className = "challenge-title";
-      tytul.textContent = `${wyzwanie.nazwa} – ${wyzwanie.opis}`;
+      kategorie[kategoria].forEach(wyzwanie => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "challenge";
 
-      const bar = document.createElement("div");
-      bar.className = "progress-bar";
+        const tytul = document.createElement("div");
+        tytul.className = "challenge-title";
+        tytul.textContent = `${wyzwanie.nazwa} – ${wyzwanie.opis}`;
 
-      const fill = document.createElement("div");
-      fill.className = "progress-fill";
-      const procent = wyzwanie.postep().toFixed(0);
-      fill.style.width = procent + "%";
-      fill.textContent = procent + "%";
+        const bar = document.createElement("div");
+        bar.className = "progress-bar";
 
-      bar.appendChild(fill);
-      wrapper.appendChild(tytul);
-      wrapper.appendChild(bar);
-      kontener.appendChild(wrapper);
-    });
+        const fill = document.createElement("div");
+        fill.className = "progress-fill";
+        const procent = wyzwanie.postep().toFixed(0);
+        fill.style.width = procent + "%";
+        fill.textContent = procent + "%";
+
+        bar.appendChild(fill);
+        wrapper.appendChild(tytul);
+        wrapper.appendChild(bar);
+        kontener.appendChild(wrapper);
+      });
+    }
   </script>
 </body>
 </html>
