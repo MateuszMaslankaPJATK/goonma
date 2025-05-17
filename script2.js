@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const kodElement = document.getElementById("kod");
 
   imgElement.src = selected.src;
+  imgElement.onload = function () {
+  imgElement.classList.add("flip-in");
+};
   szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
 
   // Dodaj efekt flash jeśli karta nie jest zielona
