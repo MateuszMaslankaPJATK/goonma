@@ -61,6 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
   imgElement.onload = function () {
     imgElement.classList.add("flip-in");
   };
+  imgElement.onerror = function () {
+  imgElement.alt = "Nie udało się załadować obrazka.";
+  szansaElement.textContent = "Błąd: Nie znaleziono karty.";
+};
+
   szansaElement.textContent = `SZANSA: ${selected.chance.toFixed(1)}%`;
 
   // Dodaj efekt flash jeśli karta nie jest zielona
