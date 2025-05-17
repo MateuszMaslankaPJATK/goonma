@@ -78,7 +78,7 @@
   const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
   const total = stats.total || 0;
 
-  const kolory = ["Green", "Blue", "Red", "Yellow", "Mythic"];
+  const kolory = ["Zielona", "Niebieska", "Czerwona", "Żółta", "Mythic"];
   let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
 
   kolory.forEach(kolor => {
@@ -87,18 +87,33 @@
     html += `<p>Karta ${kolor} wypadła ${count} razy (${procent}%)</p>`;
   });
 
-  // Dodajemy HOLO
-  let holoCount = 0;
-  for (const key in stats) {
-    if (key.includes("holo")) holoCount += stats[key];
-  }
-  const holoProcent = total > 0 ? ((holoCount / total) * 100).toFixed(1) : "0.0";
-  html += `<p style="color:#00cccc">Karty Holo: ${holoCount} (${holoProcent}%)</p>`;
+  let holoBlue = 0;
+for (const key in stats) {
+  if (key.includes("blue") && key.includes("holo")) holoBlue += stats[key];
+}
+const holoBluePercent = total > 0 ? ((holoBlue / total) * 100).toFixed(1) : "0.0";
+html += `<p style="color:#00ccff">Holo Blue: ${holoBlue} (${holoBluePercent}%)</p>`;
+
+// 🔴 Holo CZERWONE
+let holoRed = 0;
+for (const key in stats) {
+  if (key.includes("red") && key.includes("holo")) holoRed += stats[key];
+}
+const holoRedPercent = total > 0 ? ((holoRed / total) * 100).toFixed(1) : "0.0";
+html += `<p style="color:#ff4444">Holo Red: ${holoRed} (${holoRedPercent}%)</p>`;
+
+// 🟡 Holo ŻÓŁTE
+let holoYellow = 0;
+for (const key in stats) {
+  if (key.includes("Yellow") && key.includes("holo")) holoYellow += stats[key];
+}
+const holoYellowPercent = total > 0 ? ((holoYellow / total) * 100).toFixed(1) : "0.0";
+html += `<p style="color:#ffcc00">Holo Yellow: ${holoYellow} (${holoYellowPercent}%)</p>`;
 
   // Dodajemy MONOSIG
   let monosigCount = 0;
   for (const key in stats) {
-    if (key.includes("monosig")) monosigCount += stats[key];
+    if (key.includes("Signature")) monosigCount += stats[key];
   }
   const monosigProcent = total > 0 ? ((monosigCount / total) * 100).toFixed(1) : "0.0";
   html += `<p style="color:#ff00cc">Karty Monosig: ${monosigCount} (${monosigProcent}%)</p>`;
@@ -108,8 +123,6 @@
 
 
     });
-
-    document.getElementById("liczniki").innerHTML = html;
   </script>
 </body>
 </html>
