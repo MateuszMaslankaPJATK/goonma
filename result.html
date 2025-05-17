@@ -2,9 +2,8 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GOONMA</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOONMA – Wynik</title>
   <style>
     body {
       background-color: #eaffea;
@@ -19,13 +18,33 @@
       margin: 0 auto;
     }
 
-    #wynik {
+    #loader {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #27ae60;
+      margin-bottom: 20px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .karta {
       width: 90%;
       max-width: 360px;
-      height: auto;
-      display: block;
       margin: 0 auto 15px;
+      display: block;
       border-radius: 10px;
+      transform: rotateY(90deg);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    .karta.loaded {
+      transform: rotateY(0deg);
+      opacity: 1;
     }
 
     .info-text {
@@ -57,31 +76,15 @@
 
     button:hover {
       background-color: #219150;
-{
-            .flash {
-  animation: flash 1s infinite alternate;
-}
-
-@keyframes flash {
-  0% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  100% {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-  
-
-}
     }
   </style>
   <script src="script2.js" defer></script>
 </head>
 <body>
-  <div id="loader">Loading...</div>
-<img id="wynik" src="" alt="Wylosowana karta" class="karta" style="display: none;" />
+  <div id="loader">LOADING...</div>
+
   <div class="result-container">
-    <img id="wynik" src="" alt="Wylosowany obrazek" />
+    <img id="wynik" src="" alt="Wylosowany obrazek" class="karta" style="display: none;" />
 
     <p id="szansa" class="info-text">SZANSA NA TĘ KARTĘ WYNOSIŁA: ...</p>
     <p id="kod" class="info-text">KOD POTWIERDZAJĄCY: ...</p>
@@ -95,3 +98,4 @@
   </div>
 </body>
 </html>
+
