@@ -91,52 +91,60 @@
 
   <div class="card-grid" id="cardStats"></div>
 
-  <script>
-    const karty = [
-      "Green_1.png", "Green_2.png", "Green_3.png", "Green_4.png", "Green_5.png", "Green_6.png",
-      "Blue_1.png", "Blue_2.png", "Blue_3.png", "Blue_4.png",
-      "Red_1.png", "Red_2.png", "Red_3.png",
-      "Yellow_1.png", "Yellow_2.png",
-      "Mythic.png"
-    ];
+ <script>
+  const karty = [
+    "Green_1.png", "Green_2.png", "Green_3.png", "Green_4.png", "Green_5.png", "Green_6.png",
+    "Blue_1.png", "Blue_2.png", "Blue_3.png", "Blue_4.png",
+    "Red_1.png", "Red_2.png", "Red_3.png",
+    "Yellow_1.png", "Yellow_2.png",
+    // HOLO
+    "blue1_holo.png", "blue2_holo.png", "blue3_holo.png", "blue4_holo.png",
+    "red1_holo.png", "red2_holo.png", "red3_holo.png",
+    "Yellow1_holo.png", "Yellow2_holo.png",
+    // MONOSIG
+    "Yellow1_monosig.png", "red2_monosig.png", "blue2_monosig.png", "green1_monosig.png",
+    // MYTHIC
+    "Mythic.png"
+  ];
 
-    const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
-    const total = stats.total || 0;
-    const container = document.getElementById("cardStats");
+  const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
+  const total = stats.total || 0;
+  const container = document.getElementById("cardStats");
 
-    let trafione = 0;
+  let trafione = 0;
 
-    karty.forEach(karta => {
-      const wrapper = document.createElement("div");
-      wrapper.classList.add("card-wrapper");
+  karty.forEach(karta => {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("card-wrapper");
 
-      const img = document.createElement("img");
-      img.src = `images/${karta}`;
-      wrapper.appendChild(img);
+    const img = document.createElement("img");
+    img.src = `images/${karta}`;
+    wrapper.appendChild(img);
 
-      const ile = stats[karta] || 0;
-      const procent = total > 0 ? ((ile / total) * 100).toFixed(1) : "0.0";
+    const ile = stats[karta] || 0;
+    const procent = total > 0 ? ((ile / total) * 100).toFixed(1) : "0.0";
 
-      const opis = document.createElement("p");
-      opis.textContent = `${ile} trafień (${procent}%)`;
-      wrapper.appendChild(opis);
+    const opis = document.createElement("p");
+    opis.textContent = `${ile} trafień (${procent}%)`;
+    wrapper.appendChild(opis);
 
-      if (ile === 0) {
-        const overlay = document.createElement("div");
-        overlay.classList.add("overlay");
-        overlay.textContent = "BRAK";
-        wrapper.appendChild(overlay);
-      } else {
-        trafione++;
-      }
+    if (ile === 0) {
+      const overlay = document.createElement("div");
+      overlay.classList.add("overlay");
+      overlay.textContent = "BRAK";
+      wrapper.appendChild(overlay);
+    } else {
+      trafione++;
+    }
 
-      container.appendChild(wrapper);
-    });
+    container.appendChild(wrapper);
+  });
 
-    const completionText = document.getElementById("completionText");
-    const procentUkonczone = ((trafione / karty.length) * 100).toFixed(1);
-    completionText.textContent = `Ukończono: ${trafione} z ${karty.length} kart (${procentUkonczone}%)`;
-  </script>
+  const completionText = document.getElementById("completionText");
+  const procentUkonczone = ((trafione / karty.length) * 100).toFixed(1);
+  completionText.textContent = `Ukończono: ${trafione} z ${karty.length} kart (${procentUkonczone}%)`;
+</script>
+
 
 </body>
 </html>
