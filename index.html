@@ -78,42 +78,59 @@
   const stats = JSON.parse(localStorage.getItem("goonma_stats")) || {};
   const total = stats.total || 0;
 
-  const kolory = ["Zielona", "Niebieska", "Czerwona", "Żółta", "Mythic"];
+  const koloryMap = {
+    "Green": "Zielona",
+    "Blue": "Niebieska",
+    "Red": "Czerwona",
+    "Yellow": "Żółta",
+    "Mythic": "Mythic"
+  };
+
   let html = `<p><strong>ILOŚĆ OTWARTYCH KART:</strong> ${total}</p>`;
 
-  kolory.forEach(kolor => {
-    const count = stats[kolor] || 0;
+  // 🔹 Zwykłe kolory
+  for (const key in koloryMap) {
+    const count = stats[key] || 0;
     const procent = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
-    html += `<p>Karta ${kolor} wypadła ${count} razy (${procent}%)</p>`;
-  });
 
+    let colorStyle = "";
+    if (key === "Green") colorStyle = "color:green";
+    if (key === "Blue") colorStyle = "color:blue";
+    if (key === "Red") colorStyle = "color:red";
+    if (key === "Yellow") colorStyle = "color:goldenrod";
+    if (key === "Mythic") colorStyle = "color:#8e44ad";
+
+    html += `<p style="${colorStyle}">Karta ${koloryMap[key]} wypadła ${count} razy (${procent}%)</p>`;
+  }
+
+  // 🔵 Holo NIEBIESKIE
   let holoBlue = 0;
-for (const key in stats) {
-  if (key.includes("blue") && key.includes("holo")) holoBlue += stats[key];
-}
-const holoBluePercent = total > 0 ? ((holoBlue / total) * 100).toFixed(1) : "0.0";
-html += `<p style="color:#00ccff">Holo Blue: ${holoBlue} (${holoBluePercent}%)</p>`;
+  for (const key in stats) {
+    if (key.includes("blue") && key.includes("holo")) holoBlue += stats[key];
+  }
+  const holoBluePercent = total > 0 ? ((holoBlue / total) * 100).toFixed(1) : "0.0";
+  html += `<p style="color:#00ccff">Holo Blue: ${holoBlue} (${holoBluePercent}%)</p>`;
 
-// 🔴 Holo CZERWONE
-let holoRed = 0;
-for (const key in stats) {
-  if (key.includes("red") && key.includes("holo")) holoRed += stats[key];
-}
-const holoRedPercent = total > 0 ? ((holoRed / total) * 100).toFixed(1) : "0.0";
-html += `<p style="color:#ff4444">Holo Red: ${holoRed} (${holoRedPercent}%)</p>`;
+  // 🔴 Holo CZERWONE
+  let holoRed = 0;
+  for (const key in stats) {
+    if (key.includes("red") && key.includes("holo")) holoRed += stats[key];
+  }
+  const holoRedPercent = total > 0 ? ((holoRed / total) * 100).toFixed(1) : "0.0";
+  html += `<p style="color:#ff4444">Holo Red: ${holoRed} (${holoRedPercent}%)</p>`;
 
-// 🟡 Holo ŻÓŁTE
-let holoYellow = 0;
-for (const key in stats) {
-  if (key.includes("Yellow") && key.includes("holo")) holoYellow += stats[key];
-}
-const holoYellowPercent = total > 0 ? ((holoYellow / total) * 100).toFixed(1) : "0.0";
-html += `<p style="color:#ffcc00">Holo Yellow: ${holoYellow} (${holoYellowPercent}%)</p>`;
+  // 🟡 Holo ŻÓŁTE
+  let holoYellow = 0;
+  for (const key in stats) {
+    if (key.includes("Yellow") && key.includes("holo")) holoYellow += stats[key];
+  }
+  const holoYellowPercent = total > 0 ? ((holoYellow / total) * 100).toFixed(1) : "0.0";
+  html += `<p style="color:#ffcc00">Holo Yellow: ${holoYellow} (${holoYellowPercent}%)</p>`;
 
-  // Dodajemy MONOSIG
+  // 🖋️ MONOSIG
   let monosigCount = 0;
   for (const key in stats) {
-    if (key.includes("Signature")) monosigCount += stats[key];
+    if (key.includes("monosig")) monosigCount += stats[key];
   }
   const monosigProcent = total > 0 ? ((monosigCount / total) * 100).toFixed(1) : "0.0";
   html += `<p style="color:#ff00cc">Karty Monosig: ${monosigCount} (${monosigProcent}%)</p>`;
@@ -121,9 +138,6 @@ html += `<p style="color:#ffcc00">Holo Yellow: ${holoYellow} (${holoYellowPercen
   document.getElementById("liczniki").innerHTML = html;
 </script>
 
-
-    });
-  </script>
 </body>
 </html>
 
